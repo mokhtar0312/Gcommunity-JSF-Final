@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-<title>nieze</title>
+<title>News</title>
 <ui:include src="/WEB-INF/template/imports.xhtml" />
 </h:head> 
 
@@ -21,17 +21,15 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><h:outputLink value="/gcommunity-jsf-web/index.jsf">Home</h:outputLink></li>
-					<li><h:outputLink value="/gcommunity-jsf-web/about.jsf">About</h:outputLink></li>
-					
+									<li class="active"><h:outputLink value="/gcommunity-jsf-web/index.jsf">Home</h:outputLink></li>
 				
-					<li><h:outputLink value="/gcommunity-jsf-web/sponsor/sponsorManagement.jsf">Sponsor</h:outputLink></li>
-					<li><h:outputLink value="/gcommunity-jsf-web/News/NewsCrud.jsf">News</h:outputLink></li>
-					<li><h:outputLink rendered="#{!loginBean.loggedIn}" value="/gcommunity-jsf-web/login.jsf" class="btn">SIGN IN / SIGN UP</h:outputLink></li>
-					<li><h:outputLink rendered="#{loginBean.loggedIn}" value="/gcommunity-jsf-web/index.jsf" class="btn">#{loginBean.login}</h:outputLink></li>
+					<li class="active"><h:outputLink value="/gcommunity-jsf-web/News/NewsCrud.jsf">News</h:outputLink></li>
+
+<!-- 					<li><h:outputLink rendered="#{!loginBean.loggedIn}" value="/gcommunity-jsf-web/login.jsf" class="btn">SIGN IN / SIGN UP</h:outputLink></li> -->
+<!-- 					<li><h:outputLink rendered="#{loginBean.loggedIn}" value="/gcommunity-jsf-web/index.jsf" class="btn">#{loginBean.login}</h:outputLink></li> -->
 					<li>
 <h:form>
-<h:commandButton rendered="#{loginBean.loggedIn}" action="#{loginBean.doLogout()}" value="Logout" class="btn btn-secondary-outline"/>					
+<!-- <h:commandButton rendered="#{loginBean.loggedIn}" action="#{loginBean.doLogout()}" value="Logout" class="btn btn-secondary-outline"/> -->					
 				</h:form>
 				</li>
 				</ul>

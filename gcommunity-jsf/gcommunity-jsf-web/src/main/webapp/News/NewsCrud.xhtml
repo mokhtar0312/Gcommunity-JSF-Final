@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:p="http://primefaces.org/ui"
+      
+      > 
+
+<h:head></h:head> 
+<body> 
+
+<ui:include src="/News/NewsCrudHeader.xhtml"/>
+
+
+
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+						<h1>News</h1>
+						<br></br>
+<h:form>
+<h:inputText value="#{newsBean.searchh}"  />
+<h:commandButton action="#{newsBean.doFindNewsById()}" value="Search" />
+<br></br><br></br>
+</h:form>
+ <h:form rendered="#{not empty newsBean.newss}">
+        <p:dataTable value="#{newsBean.newss}" var="item"   paginator="true" id="tbl"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                         rowsPerPageTemplate="5,10,15">
+                         
+                          <f:facet name="{Exporters}">
+     
+ 
+            <h:commandLink>
+                <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="newss"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/resources/images/CSV.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl" fileName="newss" />
+            </h:commandLink>
+ 
+       
+        </f:facet>
+                         
+            <p:column><f:facet name="header"> <h:outputText value="Title" /> </f:facet><h:outputText value="#{item.title}" /></p:column>
+            <p:column><f:facet name="header"> <h:outputText value="Description" /> </f:facet><h:outputText value="#{item.description}" /> </p:column>
+            <p:column><f:facet name="header"> <h:outputText value="Date" /> </f:facet> <h:outputText value="#{item.date}" /> </p:column>
+            
+           
+            <p:column>
+            <f:facet name="header"> <h:outputText value="Edit" /> </f:facet>
+                <h:commandButton value="edit" action="#{newsBean.edit(item)}" />
+            </p:column>
+            <p:column>
+            <f:facet name="header"> <h:outputText value="Delete" /> </f:facet>
+                <h:commandButton value="delete" action="#{newsBean.doDeleteNews()}" >
+                <f:setPropertyActionListener value="#{item}"
+							target="#{newsBean.m}"></f:setPropertyActionListener>
+							</h:commandButton>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+
+ 
+    <h:panelGroup rendered="#{empty newsBean.newss}">
+        <p>No news! Please add some news.</p>
+    </h:panelGroup>
+
+<br /><br />
+<h4>News :</h4>
+    <h:panelGroup >
+      
+        <h:form>
+        <h:inputHidden value="#{newsBean.m.id}" />
+            <p>Title: <h:inputText value="#{newsBean.m.title}"  class="form-control"/></p>
+           <p>Description: <h:inputText value="#{newsBean.m.description}"  class="form-control"/></p>
+         <!--   <p>Email: <h:inputText value="#{NewsBean.m.email}" class="form-control"/></p>
+          <p>Login: <h:inputText value="#{NewsBean.m.login}" class="form-control"/></p>
+  <p>Password:
+        <p:password id="inlineFeedback" value="#{NewsBean.m.passWord}" feedback="true" inline="true" class="form-control"/>  </p> 
+        
+                <p>Phone: <h:inputText value="#{NewsBean.m.phoneNumber}" class="form-control"/></p> -->
+       
+               <p>News date :</p>
+        <p:calendar  value="#{newsBean.m.date}" id="popup" pattern="yyyy-MM-dd"  />
+         
+<!--            <p>Birth date :</p> -->
+<!--         <p:calendar id="button" value="#{NewsBean.date4}"  pattern="yyyy-MM-dd" /> -->
+        
+           <br /><br /><br />
+            <p>
+                <h:commandButton  action="#{newsBean.doCreateNews()}" 
+                value="Create"
+                class="btn btn-default"
+                />
+             
+                                <h:commandButton value="Update" action="#{newsBean.doUpdateNews()}" class="btn btn-default" update=":tbl"/>
+            </p>
+	
+        </h:form>
+    </h:panelGroup>
+   
+   </div></div></div>
+
+
+<ui:include src="/WEB-INF/template/footer.xhtml" />
+
+
+</body> 
+</html>
