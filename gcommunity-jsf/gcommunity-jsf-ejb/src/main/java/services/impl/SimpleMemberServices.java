@@ -85,7 +85,7 @@ public class SimpleMemberServices implements SimpleMemberServicesRemote, SimpleM
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SimpleMember> findAllSimpleMember() {
-		String jpql = "select m from ActiveMember m";
+		String jpql = "select m from simpleMember m";
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
