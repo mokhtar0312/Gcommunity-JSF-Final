@@ -15,7 +15,7 @@ Boolean addEvent(Event event);
 
 	Event findEventById(Integer id);
 	
-	Event findEventByName(String nom);
+	List<Event> findEventByName(String nom);
 
 
 	Boolean updateEvent(Event event);

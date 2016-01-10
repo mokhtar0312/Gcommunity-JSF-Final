@@ -23,7 +23,7 @@ Boolean addEvent(Event event);
 
 	List<Event> findAllEvents();
 	
-	Event findEventByName(String nom);
+	List<Event> findEventByName(String nom);
 	
 	Boolean affectSimpleMemberToEvent(Event event,
 			List<SimpleMember> simpleMembers);

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	
+<h:head>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"
+			type="text/javascript" />
+ <meta content="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link href="../resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<body>
+
+<ui:include src="/sponsor/headerSponsor.xhtml"/>
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+
+<h1>Our Sponsors</h1>
+	<br /><br />
+		<h:form>
+		
+		<h:inputText value="#{sponsorBean.id}"/>
+		<h:commandButton  action="#{sponsorBean.doFindSponsordById()}" value="Search" />
+		</h:form>
+		<br></br><br></br>
+			<h:form>
+			<h:commandButton class="btn btn-link" action="update" value="Show Sponsors" />
+		</h:form>
+		<br></br>
+		<h:form >
+			
+				
+			<p:dataTable id="tbl" class="table table-hover" border="2" value="#{sponsorBean.sponsors}" var="c" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                         rowsPerPageTemplate="5,10,15">
+                         
+                         
+                                 <f:facet name="{Exporters}">
+     
+ 
+            <h:commandLink>
+                <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="Sponsor"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/resources/images/CSV.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl" fileName="Sponsor" />
+            </h:commandLink>
+ 
+       
+        </f:facet>
+                         
+				<p:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Contribution"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.contribution}" />
+				</p:column>
+				<p:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="Description"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.description}" />
+				</p:column>
+				<p:column id="column3">
+					<f:facet name="header">
+						<h:outputText value="Level"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.level}" />
+				</p:column>
+				 <p:column id="column4">
+				<f:facet name="header"> <h:outputText value="Edit" /> </f:facet>
+                <h:commandButton value="edit" action="#{sponsorBean.edit(c)}" />
+            </p:column>
+				<p:column id="column5">
+					 <f:facet name="header"> <h:outputText value="Delete" /> </f:facet>
+					<h:commandButton action="#{sponsorBean.doDeleteSponsor()}"
+						value="delete">
+						<f:setPropertyActionListener value="#{c}"
+							target="#{sponsorBean.m}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</p:column>
+				
+	
+
+			</p:dataTable>
+			
+			<h:panelGroup >
+        <h3>Sponsors List</h3>
+        <h:form>
+        <div class="form-group">
+        <h:inputHidden value="#{sponsorBean.m.id}" />
+        
+            <label> Contribution: </label><br />  <p:inputText value="#{sponsorBean.m.contribution}" /><br /> 
+           <label> Description: </label> <br />   <p:inputText  value="#{sponsorBean.m.description}"></p:inputText><br /> 
+           <label> Level: </label> <br /> <p:inputText value="#{sponsorBean.m.level}" /><br /> 
+         
+           
+            </div>
+            <p>
+               
+                <h:commandButton class="btn btn-default" action="#{sponsorBean.doCreateSponsor()}" value="Create" />
+            </p>
+             <p>
+               
+                <h:commandButton class="btn btn-default" action="#{sponsorBean.doUpdateSponsor()}" value="Update" />
+            </p>
+        </h:form>
+    </h:panelGroup>
+		</h:form>
+    <div id='map_canvas' align="left" style="position: absolute;"></div>
+    </div></div></div>
+    
+    <f:view contentType="text/html">
+    <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+    </f:view>
+
+    
+    
+    <ui:include src="/WEB-INF/template/footer.xhtml" />
+    
+</body>
+</html>

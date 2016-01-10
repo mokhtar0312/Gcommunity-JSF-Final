@@ -97,13 +97,14 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Event findEventByName(String nom) {
+	public List<Event> findEventByName(String nom) {
 		System.out.println("found");
 		String jpql = "select e from Event e where e.name=:param";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param", nom);
-		return (Event) query.getSingleResult();
+		return  query.getResultList();
 
 	}
 
