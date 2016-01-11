@@ -6,7 +6,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 import entities.SimpleMember;
+import entities.TutoLevel;
 import entities.Tutorial;
 import services.interfaces.TutorialServicesRemote;
 
@@ -28,6 +30,11 @@ public class TutorialBean {
 	private int id;
 	private boolean edit;
 	private String searchh;
+	
+	public TutoLevel[] getLevels() {
+        return TutoLevel.values();
+    }
+	
 	public List<Tutorial> getTutorials() {
 		return tutorials;
 	}
