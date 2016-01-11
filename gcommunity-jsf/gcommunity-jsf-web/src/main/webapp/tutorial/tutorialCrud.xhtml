@@ -28,8 +28,8 @@
 	<br /><br />
 		<h:form>
 		
-		<h:inputText value="#{tutorialBean.id}"/>
-		<h:commandButton  action="#{tutorialBean.doFindTutorialByTyped()}" value="Search" />
+		<h:inputText value="#{tutorialBean.searchh}"/>
+		<p:commandButton  actionListener="#{tutorialBean.doFindTutorialByTyped()}" value="Search"  ajax="false"/>
 		</h:form>
 		<br></br><br></br>
 			<h:form>
@@ -119,12 +119,10 @@
         </h:form>
     </h:panelGroup>
 		</h:form>
-    <div id='map_canvas' align="left" style="position: absolute;"></div>
+    
     </div></div></div>
     
-    <f:view contentType="text/html">
-    <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
-    </f:view>
+    
 
     
     

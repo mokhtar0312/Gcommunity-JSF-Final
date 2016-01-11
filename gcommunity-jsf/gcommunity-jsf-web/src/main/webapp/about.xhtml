@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head></h:head> 
 <body> 
@@ -27,16 +28,17 @@
                 <header class="page-header">
                     <h1 class="page-title">About us</h1>
                 </header>
-                <h3>DEVSTERS</h3>
-                <p><h:graphicImage value="/resources/images/logo3.png" class="img-rounded pull-right" width="300" /> we are a group of students from the 4th ERP-BI 3 studying in the private superior school of engineering and technology.</p>
-                <p>We have to develop a bank's web application for the 4th year integrated project.</p>
-                <p>the bank provides three main features: transactions management, human resources management and inventory management.</p>
+                <h3>G-Community</h3>
+                <p><h:graphicImage value="/assets/images/cv.png" class="img-rounded pull-right" width="300" /> A bunch of young engineering students
+                , who are also true gamers. We designed and developed this website in a school project to practice  our skills</p>
+                <p>this website provides several features that you can discover by visiting the differents link in the main menu. 
+                have a nice visit :) </p>
                 <p></p>
-                <h3>Particular</h3>
+                <h3>Play</h3>
                 <p></p>
-                <h3>Professional</h3>
+                <h3>More</h3>
                 <p></p>
-                <h3>Entreprise</h3>
+                <h3>Games</h3>
                 <p></p>
             </article>
             <!-- /Article -->
@@ -56,10 +58,20 @@
 
             </aside>
             <!-- /Sidebar -->
-
+            <div id='map_canvas' align="left" style="position: absolute;"></div>
+<f:view contentType="text/html">
+    <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+    </f:view>
         </div>
-    </div>	<!-- /container -->
-
+    </div>
+    	<!-- /container -->
+    	<div  class="panel-body">
+    	<div id='map_canvas' align="left" style="position: absolute;"></div>
+    	
+</div>
+<f:view contentType="text/html">
+<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+</f:view>
 <ui:include src="/WEB-INF/template/footer.xhtml" />
 
 

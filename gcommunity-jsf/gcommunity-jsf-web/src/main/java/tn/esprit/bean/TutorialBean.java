@@ -115,7 +115,7 @@ public void edit(Tutorial item) {
 	}
 	
 	public String doFindTutorialByTyped() {
-		tutorials=(List<Tutorial>) servicesRemote.FindbyTyped(searchh);
+		tutorials= servicesRemote.FindbyTyped(searchh);
 		return "";
 	}
 	public String doUpdateTutorial(){
