@@ -86,27 +86,15 @@
 				</p:column>
 				<p:column id="column5">
 					<f:facet name="header">
-						<h:outputText value="Description"></h:outputText>
-					</f:facet>
-					<h:outputText value="#{c.description}" />
-				</p:column>
-				<p:column id="column6">
-					<f:facet name="header">
 						<h:outputText value="Fees"></h:outputText>
 					</f:facet>
 					<h:outputText value="#{c.fee}" />
 				</p:column>
-					<p:column id="column7">
-					<f:facet name="header">
-						<h:outputText value="Place"></h:outputText>
-					</f:facet>
-					<h:outputText value="#{c.lieu}" />
-				</p:column>
-				 <p:column id="column8">
+					<p:column id="column6">
 				<f:facet name="header"> <h:outputText value="Edit" /> </f:facet>
                 <h:commandButton value="edit" action="#{eventBean.edit(c)}" />
             </p:column>
-				<p:column id="column9">
+				<p:column id="column7">
 					 <f:facet name="header"> <h:outputText value="Delete" /> </f:facet>
 					<h:commandButton action="#{eventBean.doDeleteEvent()}"
 						value="delete">
@@ -126,10 +114,22 @@
         <h:inputHidden value="#{eventBean.m.id}" />
         
             <label> Date: </label><br /> <p:calendar  value="#{eventBean.m.date}" id="popup" pattern="yyyy-MM-dd"  /><br /> 
-           <label> Name: </label> <br />   <p:inputText  value="#{eventBean.m.name}"></p:inputText><br /> 
-           <label> Number of participants: </label> <br /> <p:inputText value="#{eventBean.m.numberOfParticipants}" /><br /> 
-            <label> Number of places: </label> <br /> <p:inputText value="#{eventBean.m.numberOfPlaces}" /><br /> 
-             <label> Description: </label> <br /> <p:inputText value="#{eventBean.m.description}" /><br /> 
+           <label> Name: </label> <br />   <p:inputText id="nam"  value="#{eventBean.m.name}" required="false" label="Name">
+             </p:inputText>
+           <p:message for="nam" /><br /> 
+           <label> Number of participants: </label> <br /> <p:inputText id="nbp" value="#{eventBean.m.numberOfParticipants}" 
+           validatorMessage="Should be between 4 and 16">
+           <f:validateDoubleRange minimum="0" maximum="16" />
+            </p:inputText>
+            <p:message for="nbp" />
+            <br /> 
+            <label> Number of places: </label> <br /> 
+            <p:inputText id="nop" value="#{eventBean.m.numberOfPlaces}" validatorMessage="Should be between 4 and 16" >
+            <f:validateDoubleRange minimum="0" maximum="16" />
+            </p:inputText>
+            <p:message for="nop" />
+            <br /> 
+             <label> Description: </label> <br /> <p:inputTextarea value="#{eventBean.m.description}" /><br /> 
               <label> Fee: </label> <br /> <p:inputText value="#{eventBean.m.fee}" /><br /> 
                <label> Place: </label> <br /> <p:inputText value="#{eventBean.m.lieu}" /><br /> 
          
@@ -146,12 +146,9 @@
         </h:form>
     </h:panelGroup>
 		</h:form>
-    <div id='map_canvas' align="left" style="position: absolute;"></div>
-    </div></div></div>
+       </div></div></div>
     
-    <f:view contentType="text/html">
-    <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
-    </f:view>
+    
 
     
     

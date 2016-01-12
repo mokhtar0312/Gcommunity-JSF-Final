@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import entities.Event;
-import entities.Sponsor;
+
 import services.interfaces.EventServicesRemote;
 
 @ManagedBean
@@ -111,7 +111,7 @@ public class EventBean {
 		return "";
 	}
 	public String doFindEventByName() {
-		events=(List<Event>) servicesRemote.findEventByName(searchh);
+		events=(List<Event>) servicesRemote.FindbyTyped(searchh);
 		return "";
 	}
 	public String doUpdateEvent(){

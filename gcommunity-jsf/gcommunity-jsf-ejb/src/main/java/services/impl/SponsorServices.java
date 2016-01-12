@@ -90,5 +90,15 @@ public class SponsorServices implements SponsorServicesRemote,
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Sponsor> FindbyTyped(String typed) {
+		String jpql = "SELECT n FROM Sponsor n WHERE n.contribution LIKE :pattern OR n.description LIKE :pattern1";
+		Query query = entityManager.createQuery(jpql);
+		String typ = "%" + typed + "%";
+		query.setParameter("pattern", typ).setParameter("pattern1", typ);
+		return query.getResultList();
+	}
 
 }

@@ -7,13 +7,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-
-
-
-
-
-
-
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import entities.Sponsor;
 import services.interfaces.SponsorServicesRemote;
 
@@ -25,7 +22,7 @@ public class SponsorBean {
 	SponsorServicesRemote servicesRemote;
 
 private List<Sponsor> sponsors;
-
+private BarChartModel barModel;
 private Sponsor m=new Sponsor();
 private boolean showForm = false;
 private Boolean dispTable = false;
@@ -85,6 +82,7 @@ public void setSearchh(String searchh) {
 @PostConstruct
 private void init() {
 sponsors =servicesRemote.findAllSponsors();
+createBarModels();
 }
 
 public void doDisplayTable() {
@@ -130,13 +128,103 @@ public String doUpdateSponsor(){
 	return "";
 
 }
-@SuppressWarnings("unchecked")
 public String doFindSponsordById(){
 	m= servicesRemote.findSponsorById(id);
 	sponsors.add(m);
 	System.out.println(m.getDescription());
 	return"";
 }
+public String doFindSponsorByTyped() {
+	sponsors= servicesRemote.FindbyTyped(searchh);
+	return "";
+}
+
+
+
+
+
+public BarChartModel getBarModel() {
+    return barModel;
+}
+
+
+private BarChartModel initBarModel() {
+	int a=0;
+	int b=0;
+	int c = 0;
+	int d=0;
+	int e =0;
+	
+	for(Sponsor l:sponsors)
+	{
+		if(l.getLevel().equals("Diamond"))
+			{a =a+1;
+	}
+		else if(l.getLevel().equals("Platinium"))
+			b=b+1;
+		else if(l.getLevel().equals("Gold"))
+			{c =c+1;
+		}
+		else if(l.getLevel().equals("Silver"))
+			d =d+1;
+		else if (l.getLevel().equals("Bronze"))
+			e =e+1;
+		
+	}
+	
+    BarChartModel model = new BarChartModel();
+
+    ChartSeries dia = new ChartSeries();
+    dia.setLabel("Diamond>5000$");
+    dia.set("",a);
+    
+
+    ChartSeries plat = new ChartSeries();
+    plat.setLabel("Platinum>1250$");
+    plat.set("Platinium", b);
+    
+    ChartSeries Gold = new ChartSeries();
+   Gold.setLabel("Gold>1000$");
+    Gold.set("Gold", c);
+    
+    ChartSeries sil = new ChartSeries();
+   sil.setLabel("Silver>750$");
+    sil.set("Silver", d);
+    
+    ChartSeries br = new ChartSeries();
+    br.setLabel("Bronze>500$");
+    br.set("Bronze", e);
+    
+
+    model.addSeries(dia);
+    model.addSeries(plat);
+    model.addSeries(Gold);
+    model.addSeries(sil);
+    model.addSeries(br);
+     
+    return model;
+}
+ 
+private void createBarModels() {
+    createBarModel();
+    
+}
+
+private void createBarModel() {
+    barModel = initBarModel();
+     
+    barModel.setTitle("Our sponsors distribution");
+    barModel.setLegendPosition("ne");
+     
+    Axis xAxis = barModel.getAxis(AxisType.X);
+    xAxis.setLabel("Distribution");
+     
+    Axis yAxis = barModel.getAxis(AxisType.Y);
+    yAxis.setLabel("");
+    yAxis.setMin(0);
+    yAxis.setMax(4);
+}
+ 
 	
 
 }

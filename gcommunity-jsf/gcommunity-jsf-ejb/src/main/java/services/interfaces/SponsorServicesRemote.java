@@ -19,4 +19,6 @@ public interface SponsorServicesRemote {
 	Boolean deleteSponsor(Sponsor sponsor);
 
 	List<Sponsor> findAllSponsors();
+	
+	List<Sponsor> FindbyTyped(String name);
 }
