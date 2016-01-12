@@ -7,6 +7,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+
 import services.interfaces.PacksServicesRemote;
 import entities.Packs;
 
@@ -18,6 +23,7 @@ public class PacksBean {
 	private PacksServicesRemote servicesRemote;
 
 	private List<Packs> packss;
+	private BarChartModel barModel;
 	private Packs p = new Packs();
 	private boolean showForm = false;
 	private Boolean dispTable = false;
@@ -96,6 +102,8 @@ public class PacksBean {
 	@PostConstruct
 	private void init() {
 		setPackss(servicesRemote.findAllPacks());
+		createBarModels();
+
 	}
 
 	public void doDisplayTable() {
@@ -140,6 +148,74 @@ public class PacksBean {
 	public String doFindPacksById(int id) {
 		servicesRemote.findPacksById(id);
 		return "";
+	}
+
+	public BarChartModel getBarModel() {
+		return barModel;
+	}
+
+	private BarChartModel initBarModel() {
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+
+		for (Packs l : packss) {
+			if (l.getPrice() < 50) {
+				a = a + 1;
+			} else if ((l.getPrice() < 100) && (l.getPrice() > 50))
+				b = b + 1;
+			else if ((l.getPrice() > 100) && (l.getPrice() < 200)) {
+				c = c + 1;
+			} else if (l.getPrice() > 200)
+				d = d + 1;
+
+		}
+
+		BarChartModel model = new BarChartModel();
+
+		ChartSeries dia = new ChartSeries();
+		dia.setLabel("Bronze Packs");
+		dia.set("", a);
+
+		ChartSeries plat = new ChartSeries();
+		plat.setLabel("Silver Packs");
+		plat.set("Silver", b);
+
+		ChartSeries Gold = new ChartSeries();
+		Gold.setLabel("Gold Packs");
+		Gold.set("Gold", c);
+
+		ChartSeries sil = new ChartSeries();
+		sil.setLabel("Diamond Packs");
+		sil.set("Diamond", d);
+
+		model.addSeries(dia);
+		model.addSeries(plat);
+		model.addSeries(Gold);
+		model.addSeries(sil);
+
+		return model;
+	}
+
+	private void createBarModels() {
+		createBarModel();
+
+	}
+
+	private void createBarModel() {
+		barModel = initBarModel();
+
+		barModel.setTitle("Our Packs Distribution");
+		barModel.setLegendPosition("ne");
+
+		Axis xAxis = barModel.getAxis(AxisType.X);
+		xAxis.setLabel("Packs");
+
+		Axis yAxis = barModel.getAxis(AxisType.Y);
+		yAxis.setLabel("");
+		yAxis.setMin(0);
+		yAxis.setMax(4);
 	}
 
 }
