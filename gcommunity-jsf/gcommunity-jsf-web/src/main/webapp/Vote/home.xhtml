@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	
+<h:head>
+	
+ <meta content="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link href="../resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<body>
+<ui:include src="/Vote/VoteHeader.xhtml"/>
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+
+<h1>Candidates List</h1>
+	<br /><br />
+		
+		<br></br>
+		<h:form >
+			
+				
+			<p:dataTable id="tbl" class="table table-hover" border="2" value="#{vote.listeDesCandidats}" var="c" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                         rowsPerPageTemplate="5,10,15">
+                         
+                         
+                         
+				<p:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Name"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.name}" />
+				</p:column>
+				<p:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="Surname"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.surname}" />
+				</p:column>
+				<p:column id="column3">
+					<f:facet name="header">
+						<h:outputText value="Username"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.username}" />
+				</p:column>
+				<p:column id="column4">
+					<f:facet name="header">
+						<h:outputText value="Role"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.role}" />
+				</p:column>
+				
+				
+				
+				 <p:column id="column8">
+				<f:facet name="header"> <h:outputText value="Vote" /> </f:facet>
+                <h:commandButton rendered="#{!vote.avotecetteannee}" value="Vote" action="#{vote.DoVote(c.id)}" />
+            </p:column>
+			
+				
+	
+
+			</p:dataTable>
+			
+		</h:form>	
+       
+     <h3>Result</h3>
+      <p:chart type="pie" model="#{chartView.pieModel}" style="width:400px;height:300px" />
+    </div></div></div>
+    <ui:include src="/WEB-INF/template/footer.xhtml" />
+    
+</body>
+</html>

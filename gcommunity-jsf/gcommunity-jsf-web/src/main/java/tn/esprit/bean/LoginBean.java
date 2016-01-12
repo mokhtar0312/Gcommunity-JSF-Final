@@ -1,33 +1,44 @@
 package tn.esprit.bean;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import services.interfaces.AuthentificationServiceLocal;
-import services.interfaces.SimpleMemberServicesLocal;
+
 import entities.ActiveMember;
 import entities.SimpleMember;
 
 @ManagedBean(name = "access")
-@RequestScoped
+@ViewScoped
 public class LoginBean {
 
 	@EJB
 	private AuthentificationServiceLocal authentificationServiceLocal;
-	private SimpleMemberServicesLocal simpleMemberServicesLocal;
+
+
 
 	@ManagedProperty("#{identity}")
 	private IdentityBean identityBean;
-    private SimpleMember MemberToRegister;
+
+	private Boolean loggedIn;
 	private String login;
 	private String password;
+	private String Email;
+
+	@PostConstruct
+	public void init() {
+
+	}
 
 	public LoginBean() {
 	}
+
+	
 
 	public String doLogin() {
 		String navigateTo = null;
@@ -53,16 +64,12 @@ public class LoginBean {
 		}
 		return navigateTo;
 	}
-	
-	public String DoRegister(){
-		
-		simpleMemberServicesLocal.addSimpleMember(MemberToRegister);
-		return "ok";}
 
 	public String doLogout() {
 		String navigateTo = null;
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.clear();
+		
 		navigateTo = "/index?faces-redirect=true";
 		return navigateTo;
 	}
@@ -87,12 +94,20 @@ public class LoginBean {
 		this.login = login;
 	}
 
-	public SimpleMember getMemberToRegister() {
-		return MemberToRegister;
+	public String getEmail() {
+		return Email;
 	}
 
-	public void setMemberToRegister(SimpleMember memberToRegister) {
-		MemberToRegister = memberToRegister;
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+	public Boolean getLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(Boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 }

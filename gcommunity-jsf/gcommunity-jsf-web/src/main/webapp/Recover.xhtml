@@ -29,24 +29,18 @@
 	<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<p:panel header="G-Community"
-					styleClass="v-centered h-down-200 width-500">
-					<p:messages autoUpdate="true" closable="true" />
-					<h:form>
-						<h:panelGrid columns="2">
-							<h:outputText value="Username" />
-							<p:inputText value="#{access.login}" />
-							<h:outputText value="Password" />
-							<p:password value="#{access.password}" />
-							<p:commandButton value="Login" action="#{access.doLogin}"
-								ajax="false" />
-							<br></br>
-							<p:link value="Not yet Registrated ?    " href="Register.jsf"></p:link>
-							<p:link value="Recover Password ?" href="Recover.jsf"></p:link>
-						</h:panelGrid>
-					</h:form>
-				</p:panel>
-			</div>
+	<p:panel header="G-Community" styleClass="v-centered h-down-200 width-500">
+		<p:messages autoUpdate="true" closable="true"/>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Email" />
+				<p:inputText value="#{recover.email}" />
+				
+				<p:commandButton value="Recover" action="#{recover.doRecover()}" ajax="false"/>
+				
+			</h:panelGrid>
+		</h:form>
+	</p:panel></div>
 
 </div></div>
 

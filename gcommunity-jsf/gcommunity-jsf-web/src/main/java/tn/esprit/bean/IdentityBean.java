@@ -1,5 +1,7 @@
 package tn.esprit.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -9,7 +11,12 @@ import entities.SimpleMember;
 
 @ManagedBean(name = "identity")
 @SessionScoped
-public class IdentityBean {
+public class IdentityBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6855249801392965207L;
 
 	public SimpleMember getIdentifiedUser() {
 		return identifiedUser;
