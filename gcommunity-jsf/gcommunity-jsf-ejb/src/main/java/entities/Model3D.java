@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Model3D implements Serializable {
 
 	
-	private Integer id;
+	private int id;
 	private Date datePost;
 	private String name;
 	private String img;

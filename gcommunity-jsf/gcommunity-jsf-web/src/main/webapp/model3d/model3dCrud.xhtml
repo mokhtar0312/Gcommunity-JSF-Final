@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:media value="/resources/images/hell.mp3" width="0" height="0" player="quicktime">
+    <f:param name="autoPlay" value="false" />
+</p:media>
+<h:head>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"
+			type="text/javascript" />
+ <meta content="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link href="../resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<body>
+<ui:include src="/model3d/model3dHeader.xhtml"/>
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+<h1>Our Models3D</h1>
+	<br /><br />
+
+	
+		<h:form>						
+<h:inputText value="#{model3dBean.id}"/>
+<h:commandButton  action="#{model3dBean.doFindmodeldById()}" value="Search" />
+		
+</h:form>
+		<br></br><br></br>
+		
+	<h:form>
+			<h:commandButton class="btn btn-link" action="update" value="Show Models3D" />
+		</h:form>
+		<br></br>
+		<h:form >
+			
+					<h:form>
+	<p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+    <p:graphicImage name="/resources/images/#{image}" alt="" title="#{image}"/>
+</p:galleria>
+	</h:form>
+			<p:dataTable id="tbl" class="table table-hover" border="2" value="#{model3dBean.models}" var="c" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                         rowsPerPageTemplate="5,10,15">
+                         
+                         <f:facet name="{Exporters}">
+                         
+                  <h:commandLink>
+                <p:graphicImage value="/resources/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="Tutorial"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="/resources/images/CSV.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl" fileName="Tutorial" />
+            </h:commandLink>
+ 
+       
+        </f:facet>
+        <p:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Name"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{c.name}" />
+				</p:column>
+				<p:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="Image"></h:outputText>
+					</f:facet>
+					<h:graphicImage value="/resources/images/#{image}" />
+				</p:column>
+				
+					 <p:column id="column3">
+				<f:facet name="header"> <h:outputText value="Edit" /> </f:facet>
+                <h:commandButton value="edit" action="#{model3dBean.edit(c)}" />
+            </p:column>
+				<p:column id="column4">
+					 <f:facet name="header"> <h:outputText value="Delete" /> </f:facet>
+					<h:commandButton action="#{model3dBean.doDeleteModel()}"
+						value="delete">
+						
+						
+						<f:setPropertyActionListener value="#{c}"
+							target="#{model3dBean.m}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</p:column>
+        </p:dataTable>
+        			<h:panelGroup >
+        <h3>Model3D List</h3>
+        
+        <h:form>
+        <div class="form-group">
+        <h:inputHidden value="#{model3dBean.m.id}" />
+        
+            <label> Name: </label><br />  <p:inputText value="#{model3dBean.m.name}" /><br /> 
+
+                    <label> Model image: </label> <br /> 
+<h:form>
+    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced"
+                     update="messages" auto="false" accept="#{model3dBean.m.img}" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+ 
+    <p:growl id="messages" showDetail="true" />
+</h:form>
+           
+            </div>
+            <p>
+               
+                <h:commandButton class="btn btn-default" action="#{model3dBean.doCreateModel()}" value="Create" />
+            </p>
+             <p>
+               
+                <h:commandButton class="btn btn-default" action="#{model3dBean.doUpdateModel()}" value="Update" />
+            </p>
+        </h:form>
+    </h:panelGroup>
+		</h:form>
+		
+		<h:form>
+		<iframe width="420" height="315"
+src="http://www.youtube.com/embed/BkuvxG4S8aI?autoplay=0">
+</iframe>
+		</h:form>
+    <div id='map_canvas' align="left" style="position: absolute;"></div>
+    </div></div></div>
+    
+    <f:view contentType="text/html">
+    <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+    </f:view>
+
+    
+    
+    <ui:include src="/WEB-INF/template/footer.xhtml" />
+    
+</body>
+</html>
