@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:include src="/News/NewsCrudHeader.xhtml" />
+
+
+
+	<br></br>
+	<br></br>
+	<br></br>
+	<br></br>
+	<br></br>
+	<br></br>
+	<br></br>
+
+
+	<!-- <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body"> -->
+	<h1>League of legends Champions</h1>
+	<div class="panel panel-default">
+		<br></br>
+		<h:form id="form">
+			<p:carousel numVisible="1" effect="easeInStrong" headerText="Lore"
+				style="margin-bottom:0">
+				<p:tab title="Aarex">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:graphicImage value="#{champsBean.lolis[0]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto"/>
+							<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[0]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Thresh">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:graphicImage value="#{champsBean.lolis[1]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto" />
+						<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[1]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Sin Lee">
+					<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage value="#{champsBean.lolis[2]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto"/>
+							<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[2]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Sin Lee">
+					<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage value="#{champsBean.lolis[3]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto"/>
+							<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[3]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Sin Lee">
+					<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage value="#{champsBean.lolis[4]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto"/>
+							<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[4]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Sin Lee">
+					<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage value="#{champsBean.lolis[5]}" width="150px"
+							height="150px" style="display: block;
+    margin-left: auto;
+    margin-right: auto"/>
+							<div style="height: 120px; width: 120px;">
+						<h:outputText value="#{champsBean.lores[5]}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+			</p:carousel>
+		</h:form>
+	</div>
+	<!--    </div></div></div> -->
+
+
+	<ui:include src="/WEB-INF/template/footer.xhtml" />
+
+
+</body>
+</html>
