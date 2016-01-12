@@ -20,4 +20,5 @@ public interface PacksServicesRemote {
 	Boolean deletePacks(Packs packs);
 
 	List<Packs> findAllPacks();
+	List<Packs> findPacksByName(String nom);
 }

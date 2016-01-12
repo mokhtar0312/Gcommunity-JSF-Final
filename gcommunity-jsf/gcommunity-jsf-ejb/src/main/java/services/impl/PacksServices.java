@@ -90,5 +90,15 @@ System.err.println("problem deleting packs");
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Packs> findPacksByName(String nom) {
+		System.out.println("found");
+		String jpql = "select e from Packs e where e.name=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", nom);
+		return  query.getResultList();
 
+	}
 }

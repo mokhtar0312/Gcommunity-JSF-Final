@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import entities.Equipment;
+import entities.Packs;
 
 
 @Remote
@@ -22,4 +23,5 @@ public interface EquipmentServicesRemote {
 
 	List<Equipment> findAllEquipment();
 
+	List<Equipment> findEquipmentByName(String nom) ;
 }

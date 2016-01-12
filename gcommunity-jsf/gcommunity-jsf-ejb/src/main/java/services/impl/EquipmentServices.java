@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import services.interfaces.EquipmentServicesLocal;
 import services.interfaces.EquipmentServicesRemote;
 import entities.Equipment;
+import entities.Packs;
 
 /**
  * Session Bean implementation class EquipmentServices
@@ -88,5 +89,14 @@ public class EquipmentServices implements EquipmentServicesRemote,
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Equipment> findEquipmentByName(String nom) {
+		System.out.println("found");
+		String jpql = "select e from Equipment e where e.name=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", nom);
+		return  query.getResultList();
 
+	}
 }
