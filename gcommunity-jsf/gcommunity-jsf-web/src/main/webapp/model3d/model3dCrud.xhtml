@@ -38,13 +38,15 @@
 			<h:commandButton class="btn btn-link" action="update" value="Show Models3D" />
 		</h:form>
 		<br></br>
-		<h:form >
+		
 			
 					<h:form>
 	<p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
     <p:graphicImage name="/resources/images/#{image}" alt="" title="#{image}"/>
 </p:galleria>
 	</h:form>
+	
+	<h:form>
 			<p:dataTable id="tbl" class="table table-hover" border="2" value="#{model3dBean.models}" var="c" rows="10"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
@@ -54,12 +56,12 @@
                          
                   <h:commandLink>
                 <p:graphicImage value="/resources/images/pdf.png" width="24"/>
-                <p:dataExporter type="pdf" target="tbl" fileName="Tutorial"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="Models3D"/>
             </h:commandLink>
  
             <h:commandLink>
                 <p:graphicImage value="/resources/images/CSV.png" width="24"/>
-                <p:dataExporter type="csv" target="tbl" fileName="Tutorial" />
+                <p:dataExporter type="csv" target="tbl" fileName="Models3D" />
             </h:commandLink>
  
        
@@ -102,12 +104,12 @@
             <label> Name: </label><br />  <p:inputText value="#{model3dBean.m.name}" /><br /> 
 
                     <label> Model image: </label> <br /> 
-<h:form>
+
     <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced"
                      update="messages" auto="false" accept="#{model3dBean.m.img}" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
  
     <p:growl id="messages" showDetail="true" />
-</h:form>
+
            
             </div>
             <p>
@@ -118,8 +120,9 @@
                
                 <h:commandButton class="btn btn-default" action="#{model3dBean.doUpdateModel()}" value="Update" />
             </p>
-        </h:form>
+      </h:form>  
     </h:panelGroup>
+    
 		</h:form>
 		
 		<h:form>
